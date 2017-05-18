@@ -14,32 +14,36 @@
     <div id="app"></div>
 
     <script type="text/babel">
-        function Aranda(props){
-            const name = props.name;
-
-            return (
-                <h1 id="Title">
-                    Aranda {name}
-                </h1>
-            );
+        
+        class Aranda extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    count: 0,
+                };
+                this.handleClick = this.handleClick.bind(this);
+            }
+            handleClick() {
+                this.setState({
+                    count: this.state.count + 1,
+                })
+            }
+            
+            render() {
+                
+                const name = this.props.name;
+                
+                return (
+                    <h1 id="Title" onClick={this.handleClick}>
+                        Aranda {name} {this.state.count}
+                    </h1>
+                );
+            }
         }
-
-
         ReactDOM.render(
             <Aranda name="software" />,
             document.getElementById('app')
         )
-
-         setTimeout(
-            () => {
-                ReactDOM.render(
-                    <Aranda name="software !!!" />,
-                    document.getElementById('app')
-                );
-            },
-        1000
-        );
-
     </script>
 </body>
 </html>
