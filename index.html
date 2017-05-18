@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>aranda-react</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.2/babel.js"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.js"></script>
 </head>
@@ -12,30 +13,27 @@
     
     <div id="app"></div>
 
-    <script>
+    <script type="text/babel">
         function Aranda(props){
             const name = props.name;
 
-            return React.DOM.h1({
-                    id: 'Title',
-                }, 'Aranda ' + name
+            return (
+                <h1 id="Title">
+                    Aranda {name}
+                </h1>
             );
         }
 
-        const aranda = React.createElement(Aranda, {
-                name: 'software'
-            }
-        )
 
         ReactDOM.render(
-            aranda,
+            <Aranda name="software" />,
             document.getElementById('app')
         )
 
          setTimeout(
             () => {
                 ReactDOM.render(
-                    React.createElement(Aranda, { name: 'software !!!' }),
+                    <Aranda name="software !!!" />,
                     document.getElementById('app')
                 );
             },
