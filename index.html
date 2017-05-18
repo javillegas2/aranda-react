@@ -14,6 +14,14 @@
     <div id="app"></div>
 
     <script type="text/babel">
+
+        function Title(props) {
+            return (
+                <h1 id="Title" onClick={props.onClick}>
+                Aranda {props.name} {props.count}
+                </h1>
+            );
+        }
         
         class Aranda extends React.PureComponent {
             constructor(props) {
@@ -24,6 +32,37 @@
                 };
 
                 this.handleClick = this.handleClick.bind(this);
+            }
+
+            componentWillMount() {
+                console.log("El componente se va montar");
+            }
+
+            componentDidMount() {
+                document.addEventListener('click', this.handleClick)
+            }
+            
+            componentWillReceiveProps(nextProps){
+                this.setState({
+                    state: this.state * 2
+                })
+            }
+
+            shouldComponentUpdate(nextProps, nextState) {
+                if (nextState.count !== this.state.count) return true;
+                return false;
+            }
+
+            componentWillUpdate() {
+                console.log('el componente se va a actualizar');
+            }
+
+            componentDidUpdate() {
+                console.log('el componente se actualizó');
+            }
+
+            componentWillUnmount() {
+                document.removeEventListener('click', this.handleClick);
             }
 
             handleClick() {
@@ -37,37 +76,17 @@
                 const name = this.props.name;
                 
                 return (
-                    <h1 id="Title" onClick={this.handleClick}>
-                        Aranda {name} {this.state.count}
-                    </h1>
+                    <Title 
+                        name="software"
+                        onClick={this.handleClick}
+                        count={this.state.count}
+                    />
                 );
             }
         }
 
-        const OtroComponent = React.createClass({
-            getInitialState() {
-                return {
-                    count: 0,
-                };
-            },
-            handleClick() {
-                this.setState({
-                    count: this.state.count + 1,
-                });
-            },
-            render() {
-                const name = this.props.name;
-                return (
-                    <h1 id="Title" onClick={this.handleClick}>
-                        Aranda {name} {this.state.count}
-                    </h1>
-                );
-            }
-        });
-
-
         ReactDOM.render(
-            <OtroComponent name="software" />,
+            <Aranda name="software" />,
             document.getElementById('app')
         )
 
