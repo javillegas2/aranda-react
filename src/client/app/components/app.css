@@ -1,0 +1,12 @@
+#containerApp{
+    display: flex;
+    justify-content: center;
+    align-content: center; 
+    margin: auto;
+    width: 155px;
+    height: 240px;
+    bottom: 40px;
+    background-color: slategrey;
+    color: white;
+    padding: 10px;
+}
